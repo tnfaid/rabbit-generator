@@ -1,0 +1,2 @@
+2023-08-01 15:04:32,672|DEBUG|||||||||||||Send Message ke 2
+2023-08-01 15:04:32,715|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@65d6640 to Queue: queue_fulfillment2

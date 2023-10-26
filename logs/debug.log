@@ -1,0 +1,28 @@
+2023-10-27 02:05:15,039|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:05:15,047|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@391dfe7c to Queue: queue_fulfillment0
+2023-10-27 02:11:41,794|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:11:41,799|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@5be69f7e to Queue: queue_fulfillment0
+2023-10-27 02:13:49,027|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:13:49,045|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@163df259 to Queue: queue_fulfillment0
+2023-10-27 02:15:32,119|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:15:32,123|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@3cf06a01 to Queue: queue_fulfillment0
+2023-10-27 02:18:55,702|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:18:55,706|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@1aee6d14 to Queue: queue_fulfillment0
+2023-10-27 02:21:42,369|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:21:42,378|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@d180961 to Queue: queue_fulfillment0
+2023-10-27 02:26:21,935|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:26:21,940|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@1d0b447b to Queue: queue_fulfillment0
+2023-10-27 02:29:40,583|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:29:40,589|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@1d0b447b to Queue: queue_fulfillment0
+2023-10-27 02:32:47,582|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:32:47,586|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@3639b04 to Queue: queue_fulfillment0
+2023-10-27 02:34:21,801|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:34:21,805|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@37fca349 to Queue: queue_fulfillment0
+2023-10-27 02:40:03,063|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:40:03,071|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@30a62a5b to Queue: queue_fulfillment0
+2023-10-27 02:42:18,712|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:42:18,718|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@4f2fdf3d to Queue: queue_fulfillment0
+2023-10-27 02:44:01,890|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:44:01,903|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@48d31d25 to Queue: queue_fulfillment0
+2023-10-27 02:47:00,550|DEBUG|||||||||||||Send Message ke 0
+2023-10-27 02:47:00,558|DEBUG|||||||||||||Message sent -> com.example.rabbitInjectGenerator.adapter.out.message_broker.QueueFulfillment@163df259 to Queue: queue_fulfillment0

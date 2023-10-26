@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration status="WARN">
+	<Appenders>
+		<RollingFile name="TdrAppender"
+			fileName="logs/INJECT_RABBIT.log"
+			filePattern="logs/INJECT_RABBIT_%d{yyyyMMdd_HH}.log">
+			<PatternLayout>
+				<Pattern>%d|%X{campaignId}|%X{msisdn}|%X{errCode}|%X{errStatus}|%X{eventTopicTrigger}|%X{startDateCampaign}|%X{endDateCampaign}|%X{mainTrigger}|%X{otherParamTrigger}|%X{bonus}|%X{other}|%X{timeProcessed}|%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+		</RollingFile>
+		<RollingFile name="DebugAppender"
+					 fileName="logs/debug.log"
+					 filePattern="logs/debug_%d{yyyyMMdd_HH}.log">
+			<PatternLayout>
+				<Pattern>%d|%p|%X{campaignId}|%X{msisdn}|%X{errCode}|%X{errStatus}|%X{eventTopicTrigger}|%X{startDateCampaign}|%X{endDateCampaign}|%X{mainTrigger}|%X{otherParamTrigger}|%X{bonus}|%X{other}|%X{timeProcessed}|%m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+		</RollingFile>
+		<RollingFile name="ErrorAppender"
+					 fileName="logs/error.log"
+					 filePattern="logs/error_%d{yyyyMMdd_HH}.log">
+			<PatternLayout>
+				<Pattern>%d|%p|%X{campaignId}|%X{msisdn}|%X{errCode}|%X{errStatus}|%X{eventTopicTrigger}|%X{startDateCampaign}|%X{endDateCampaign}|%X{mainTrigger}|%X{otherParamTrigger}|%X{bonus}|%X{other}|%X{timeProcessed}|%m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+		</RollingFile>
+		<Console name="RootConsole" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="tdr" level="info" additivity="false">
+			<AppenderRef ref="TdrAppender" />
+		</Logger>
+		<Logger name="debugger" level="debug" additivity="false">
+			<AppenderRef ref="DebugAppender" />
+		</Logger>
+		<Logger name="error" level="error" additivity="false">
+			<AppenderRef ref="ErrorAppender" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="RootConsole" />
+		</Root>
+	</Loggers>
+</Configuration>
