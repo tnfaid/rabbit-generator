@@ -1,9 +1,9 @@
 package com.example.rabbitInjectGenerator.adapter.out.message_broker;
 
 import com.example.rabbitInjectGenerator.domain.util.Util;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.routing.key}")
+    @Value("${rabbitmq.routing.key.nama}")
     private String routingKey;
 
     @Value("${rabbitmq.exchange.name}")
@@ -278,6 +278,27 @@ public class RabbitMQConfig {
 
     private RabbitTemplate rabbitTemplate;
 
+    public void sendMessageCampaignProgram(CampaignProgram campaignProgram, String queue){
+        Util.debugLogger.debug("Message sent -> {} to Queue: {}", campaignProgram,queue);
+        if (isQueueExistCampaignProgram(queue)){
+            String message=new Util().esbFulfillmentToJSONObject(campaignProgram).toString();
+
+            String exchange = exchangeName;
+            try {
+//                rabbitTemplate.convertAndSend(exchange, "", message.getBytes(StandardCharsets.UTF_8));
+            rabbitTemplate.convertAndSend(queue,message.getBytes(StandardCharsets.UTF_8));
+                Util.debugLogger.debug("Message sent to Exchange: {}", exchange);
+            } catch (AmqpException ex) {
+                Util.errorLogger.error("Error sending message to Exchange: {}", exchange, ex);
+            }
+////            rabbitTemplate.convertAndSend(exchange, "", message, msg -> {
+////                msg.getMessageProperties().setDelay(1000);
+////                return msg;
+////            });
+        }
+
+    }
+
     public RabbitMQConfig(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
@@ -287,32 +308,20 @@ public class RabbitMQConfig {
         if (isQueueExistFulfillment(queue)){
             String message=new Util().esbFulfillmentToJSONObject(queueFulfillment).toString();
 
-//            rabbitTemplate.convertAndSend("my-custom-exchange", "routing-key", message);
+            for (int i = 0; i < 10; i++) {
+                String exchange = exchangeName + i;
+                try {
+                    rabbitTemplate.convertAndSend(exchange, "", message, msg -> {
+                        msg.getMessageProperties().setDelay(1000);
+                        return msg;
+                    });
+                    Util.debugLogger.debug("Message sent to Exchange: {}", exchange);
+                } catch (AmqpException ex) {
+                    Util.errorLogger.error("Error sending message to Exchange: {}", exchange, ex);
+                }
+            }
 
-            rabbitTemplate.convertAndSend(queue,message.getBytes(StandardCharsets.UTF_8));
-            rabbitTemplate.destroy();
 
-//            rabbitTemplate.convertAndSend("my-exchange",queue,message.getBytes(StandardCharsets.UTF_8));
-//            rabbitTemplate.destroy();
-
-//
-//            rabbitTemplate.convertAndSend("my-exchange", "", message, msg -> {
-//                msg.getMessageProperties().setDelay(1000);
-//                return msg;
-//            });
-
-
-        }
-
-    }
-
-    public void sendMessageCampaignTracking(CampaignProgram campaignProgram, String queue){
-        Util.debugLogger.debug("Message sent -> {} to Queue: {}", campaignProgram,queue);
-        if (isQueueExistCampaignProgram(queue)){
-            String message=new Util().esbFulfillmentToJSONObject(campaignProgram).toString();
-//            rabbitTemplate.convertAndSend("my-exchange",queue,message.getBytes(StandardCharsets.UTF_8));
-            rabbitTemplate.convertAndSend(queue,message.getBytes(StandardCharsets.UTF_8));
-            rabbitTemplate.destroy();
         }
 
     }

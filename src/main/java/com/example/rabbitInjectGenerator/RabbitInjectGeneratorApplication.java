@@ -37,7 +37,7 @@ public class RabbitInjectGeneratorApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (generalConfig.getBlastStatus().equalsIgnoreCase("YES")){
-			for (int i = 0; i< fullfilmentConfiguration.getIncentiveRulesTimeout(); i++){
+			for (int i = 0; i <= fullfilmentConfiguration.getIncentiveRulesTimeout(); i++){
 				sendMessageAll(i);
 
 			}
@@ -80,7 +80,7 @@ public class RabbitInjectGeneratorApplication implements CommandLineRunner {
 //			rabbitMQProducer.sendMessageFulfillment(mappingMessageEsbFulfillment(Integer.parseInt(lastIteration), i, formatter), generalConfig.getFulfillmentQueue());
 		}
 		if (generalConfig.getInjectCampaignTracking().equalsIgnoreCase("ON")){
-			rabbitMQProducer.sendMessageCampaignTracking(mappingMessageCampaignProgram(), generalConfig.getCampaignProgramQueue());
+			rabbitMQProducer.sendMessageCampaignProgram(mappingMessageCampaignProgram(i), generalConfig.getCampaignProgramQueue());
 		}
 	}
 	QueueFulfillment mappingMessageEsbFulfillment(int lastIteration, int i, DateTimeFormatter formatter ){
@@ -177,8 +177,12 @@ public class RabbitInjectGeneratorApplication implements CommandLineRunner {
 		return queueInternationalMessage;
 	}
 
-	CampaignProgram mappingMessageCampaignProgram(){
+	CampaignProgram mappingMessageCampaignProgram(int i){
 		JSONObject jsonMessageCampaignProgram = new JSONObject(generalConfig.getJsonCampaignProgram().toString());
+		String msisdnString = "62812";
+		String msisdnResultIncrement = incrementMsisdn(msisdnString, i);
+
+
 		CampaignProgram campaignProgram = new CampaignProgram(
 				jsonMessageCampaignProgram.get("campaign_event").toString(),
 				jsonMessageCampaignProgram.get("trx_kafka_date").toString(),
@@ -187,7 +191,7 @@ public class RabbitInjectGeneratorApplication implements CommandLineRunner {
 				JsonParser.parseString(jsonMessageCampaignProgram.get("other_param_trigger").toString()).getAsJsonObject(),
 				jsonMessageCampaignProgram.get("trx_kafka_id").toString(),
 				new Integer(jsonMessageCampaignProgram.get("counter").toString()),
-				jsonMessageCampaignProgram.get("msisdn").toString(),
+				msisdnResultIncrement,
 				jsonMessageCampaignProgram.get("incentive_campaign_id").toString(),
 				jsonMessageCampaignProgram.get("event_topic_trigger").toString(),
 				jsonMessageCampaignProgram.get("fulfillment_date").toString(),
@@ -195,6 +199,22 @@ public class RabbitInjectGeneratorApplication implements CommandLineRunner {
 		);
 
 		return campaignProgram;
+	}
+
+	public static String incrementMsisdn(String msisdn, int i) {
+		try {
+			// Convert the msisdn to an integer
+			Long msisdnInt = Long.parseLong(msisdn+i);
+			System.out.println("valid  msisdn format: " + msisdnInt);
+
+			// Convert it back to a string
+			return Long.toString(msisdnInt);
+		} catch (NumberFormatException e) {
+			// Handle the case where msisdn is not a valid integer
+			System.out.println("\n\n\n----------------------------------------" +
+					"\nInvalid msisdn format: " + msisdn);
+			return null;
+		}
 	}
 
 
